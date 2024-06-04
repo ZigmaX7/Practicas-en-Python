@@ -37,19 +37,19 @@ def listar_producto():
 def opciones_menu(): 
   opcion_valida = False
   while opcion_valida == False:
-    opcion = int(input("""
-                          1. agregar producto.
-                          2. eliminar producto.
-                          3. modificar producto.
-                          4. buscar producto.
-                          5. listar productos.
-                          6. salir.
+    opcion = int(input("""                       
+                          
+                          1. Agregar producto.
+                          2. Eliminar producto.
+                          3. Modificar producto.
+                          4. Buscar producto.
+                          5. Listar productos.
+                          6. Salir.
                           
                           Ingrese una opcion del menú:
                           
                           
-                          """))
-    
+                          """))    
     if opcion >= 1 and opcion <=6:
       opcion_valida = True
   return opcion

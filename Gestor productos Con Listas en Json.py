@@ -6,7 +6,7 @@ import json
 
 lista_productos = []
 
-PATH_FILE = 'D:/Users/Sigma/Desktop/CODO A CODO 4.0 INICIAL/Ejercicios Python/productos.json'
+PATH_FILE = "D:/Users/Sigma/Desktop/CODO A CODO 4.0 INICIAL/Ejercicios Python/productos.json"
 
 def menu():
     #falta agregar validación de datos en ciclo.
@@ -52,14 +52,22 @@ def crear_producto(nombre,precio,cantidad):
     return nuevo_producto
 
 def main():
-    print("funcion principal")
+    
     while True:
+        
         opcion = menu()
+        
         if opcion == 1:   # solicitar datos producto
-            nombre = input("ingrese el nombre del producto.\n")
-            precio = float(input("ingrese el precio del producto.\n"))
-            cantidad = int(input("ingrese la cantidad del producto.\n"))
-            producto = crear_producto(nombre,precio,cantidad)
+            while true:
+                try:            
+                    nombre = str(input("ingrese el nombre del producto.\n"))
+                    precio = float(input("ingrese el precio del producto.\n"))
+                    cantidad = int(input("ingrese la cantidad del producto.\n"))
+                    producto = crear_producto(nombre,precio,cantidad)
+                    break 
+                except ValueError:
+                    print("ingreso inválido, intente nuevamente")
+        if opcion == 2:    
             
             
         break
