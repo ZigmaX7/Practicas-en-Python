@@ -32,20 +32,22 @@ def cargar_productos():
             return json.load(file)
     except FileNotFoundError:
         return []
-    
-    
+
 def guardar_productos(lista_productos):
     with open ('PATH_FILE', 'w') as file:
         json.dump(lista_productos,file)
 
-def crear_producto(nombre,precio,cantidad):
+def buscar_productos(id):
     lista_productos = cargar_productos()
-    nuevo_producto = {
-        'id': len(lista_productos) + 1,
-        'nombre': nombre,
-        'precio':  precio,
-        'cantidad': cantidad,
-        }
+    for i in range (len((lista_productos)-1)):
+        if lista_productos[i].id == id:
+            return lista_productos[i]
+    return("producto inexistente")
+    
+
+def crear_producto(nombre,precio,cantidad):
+    lista_productos = cargar_productos() # trae desde el archivo toda la información que tenga.
+    nuevo_producto = { 'id': len(lista_productos) + 1, 'nombre': nombre,'precio':  precio, 'cantidad': cantidad}
     
     lista_productos.append(nuevo_producto)
     guardar_productos(lista_productos)
@@ -63,7 +65,8 @@ def main():
                     nombre = str(input("ingrese el nombre del producto.\n"))
                     precio = float(input("ingrese el precio del producto.\n"))
                     cantidad = int(input("ingrese la cantidad del producto.\n"))
-                    producto = crear_producto(nombre,precio,cantidad)
+                    producto = crear_producto(nombre,precio,cantidad) # agrega a la lista y guarda en el archivo
+                    print("usted ha creado el siguiente producto:\n",producto)
                     break 
                 except ValueError:
                     print("ingreso inválido, intente nuevamente")

@@ -1,0 +1,107 @@
+programación orientada a objetos es un paradigna de programación que trata de representar las cosas de la vida real pero no paso por paso (  de manera secuencial )
+
+toma un objeto de la vida real y lo vuelca al codigo.
+
+el codigo principal se vuelca en lo que tiene que ver a objetos.
+
+las clases son una plantilla o abstracción de un objeto en la vida real. se definen su astributos de clase
+
+luego se crea el constructor 
+
+y luego se crean los metodos para controlar esas clases
+
+las plantillas o clases deben tener un metodo constructor
+
+
+ej:
+
+class animal:           #el doble guion bajo se usa para definir atributos de clase
+
+	def __init__(self, nombre, edad):     ## INIT ES EL METODO CONSTRUCTOR para definir correctamente a una clase
+		self.__nombre = nombre        ## self es un objeto en python hecho para representar a la clase.
+		self.__edad = edad            ## self contiene los atributos de la clase, los encapsula los atributos de clase esten ocultos, y solo se pueda acceder a ellos utilizando métodos , trata de plasmar un los comportamiento de la vida real
+
+******* hay clases de metodos
+
+accesadores 
+
+mutadores 
+
+personallzados.
+
+Ej:
+
+def getNombre(self):
+	return self.__nombre   ## metodo accesador
+
+def setNombre(self, nombre):
+	self.__nombre = nombre  ## metodo mutador
+
+def getEdad(self):
+	return self.__edad
+
+def setEdad(self, edad):
+	self.__edad = edad
+
+def reproducirse(self):     ##   metodo personalizado 
+	print(f"Yo soy el animal {self.__nombre} y puedo reproducirme ")
+		
+
+Hay clases que utilizan otras clases, 
+
+en la programación orientada a objetos existe algo que se llama herencia, y es una gerarquía de una clase a otra , sirve para reulizar el codigo.
+
+es la subclase una clase padre o hijo.
+
+Ejemplo de subclases
+
+
+
+
+en otro archivo 
+
+se tuiliza el metodo constructor
+
+
+Ej: 
+
+Cada Clase se crea en un archivo diferente, es una buena practica.
+
+entonces Perro hereda atributos de animal desde otro archivo , por ser un animal representando un objeto de la vida real.
+
+en codigo 
+
+from model.Animal import Animal
+
+class Perro(Animal):
+
+	def __init__(self, nombre, edad, cantidad_Pulgas):
+		super().__init__(nombre, edad)    ## super se utiliza para acceder al constructor de la clase padre 
+		self.__cantidadPulgas = cantidad_Pulgas
+
+	def getCantidad_pulgas(self):
+		return self.__cantidad_pulgas
+
+	def setCantidadPulgas(self, cantidad_pulgas):        
+		self.__cantidad_
+
+
+creando otra clase  " serpiente "           ## un objeto es la instancia de una clase.
+
+from mode.Animal import Animal
+
+class Serpiente(Animal):
+	def
+
+Una tupla es como una lista, pero son inmutables no cambian son como listas constantes.
+
+
+polimorfismo es cuando un metodo cambia de forma según la clase que está obteniendo. Es cuando las operaciones quehagas dentro de la clases  cambian de forma según la clase en la que estan siendo llamadas.
+
+se recomienda utilizar el polimorfismo unicamente en metodos personalizados.
+
+
+	
+
+
+

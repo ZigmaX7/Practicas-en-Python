@@ -1,0 +1,118 @@
+import os
+import json
+
+class ArticleManager:
+    def __init__(self):
+        self.articles = {}
+
+    def create_article(self, title, description, body):
+        article_id = len(self.articles) + 1
+        self.articles[article_id] = {'title': title, 'description': description, 'body': body}
+
+    def modify_article(self, article_id, title=None, description=None, body=None):
+        if article_id in self.articles:
+            if title:
+                self.articles[article_id]['title'] = title
+            if description:
+                self.articles[article_id]['description'] = description
+            if body:
+                self.articles[article_id]['body'] = body
+        else:
+            print("Article not found.")
+
+    def delete_article(self, article_id):
+        if article_id in self.articles:
+            del self.articles[article_id]
+            print("Article deleted successfully.")
+        else:
+            print("Article not found.")
+
+    def search_articles(self, query):
+        results = []
+        for article_id, article in self.articles.items():
+            if query.lower() in article['body'].lower():
+                results.append((article_id, article['title']))
+        return results
+
+    def parse_article_from_text(self, text):
+        try:
+            article_data = json.loads(text)
+            title = article_data.get('title')
+            description = article_data.get('description')
+            body = article_data.get('body')
+            return title, description, body
+        except json.JSONDecodeError:
+            print("Error parsing article from text.")
+            return None, None, None
+
+    def import_articles_from_text_file(self, file_path, delimiter="---"):
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            with open(file_path, 'r') as file:
+                articles_text = file.read().split(delimiter)
+
+            for text in articles_text:
+                title, description, body = self.parse_article_from_text(text)
+                if title and description and body:
+                    self.create_article(title, description, body)
+            print("Articles imported successfully.")
+        else:
+            print("File not found.")
+
+    def display_articles(self):
+        if self.articles:
+            for article_id, article in self.articles.items():
+                print(f"Article ID: {article_id}")
+                print(f"Title: {article['title']}")
+                print(f"Description: {article['description']}")
+                print(f"Body: {article['body']}")
+                print()
+        else:
+            print("No articles found.")
+
+# Example Usage
+if __name__ == "__main__":
+    manager = ArticleManager()
+    
+    # Importing articles from text file
+    try:
+        file_path = input("Enter the path to the text file containing articles: ")
+        manager.import_articles_from_text_file(file_path)
+    except Exception as e:
+        print(f"Error importing articles: {e}")
+
+    # Displaying articles
+    manager.display_articles()
+
+    # Searching articles
+    search_query = input("Enter search query: ")
+    search_results = manager.search_articles(search_query)
+    if search_results:
+        print("Search Results:")
+        for result in search_results:
+            print(result)
+    else:
+        print("No matching articles found.")
+
+    # Modifying an article
+    try:
+        article_id = int(input("Enter the ID of the article to modify: "))
+        title = input("Enter the new title (leave empty to keep unchanged): ")
+        description = input("Enter the new description (leave empty to keep unchanged): ")
+        body = input("Enter the new body (leave empty to keep unchanged): ")
+        manager.modify_article(article_id, title, description, body)
+    except ValueError:
+        print("Invalid article ID.")
+    except Exception as e:
+        print(f"Error modifying article: {e}")
+
+    # Deleting an article
+    try:
+        article_id = int(input("Enter the ID of the article to delete: "))
+        manager.delete_article(article_id)
+    except ValueError:
+        print("Invalid article ID.")
+    except Exception as e:
+        print(f"Error deleting article: {e}")
+
+    # Displaying articles after modifications/deletions
+    manager.display_articles()
